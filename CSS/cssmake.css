@@ -1,0 +1,75 @@
+body{
+    background-color: bisque;
+    
+}
+background-image{
+
+    
+    min-height: 100%;
+    background-position: center;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: cover;
+}
+header {  
+    background-image:url('pic2.jpg');  
+    position: relative;;  
+    left: 0;  
+    right: 0;  
+    top: 5px;  
+    height: 220px;  
+    display: flex;  
+    align-items: center;  
+    box-shadow: 0 0 25px 0 black;  
+    }
+button{
+    background-color: aqua;
+    color: #000;
+}
+button a{
+    background-color: aqua;
+    color: #000; 
+}
+button a:hover{
+    color: #000;
+    background-color: beige;
+}
+.navbar {
+    overflow: hidden;
+    background-color: grey;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 123px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  .navbar a:hover {
+    background: #f1f1f1;
+    color: black;
+  }
+  footer {
+    text-align: center;
+    padding: 3px;
+    background-color: DarkSalmon;
+    color: white;
+  }
+  a:link, a:visited {
+    background-color: black;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  a:hover, a:active {
+    background-color: grey;
+  }
+  

@@ -2,7 +2,7 @@ const form = document.querySelector('.add');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-
+if(form.action.value=="register"){
   const data = {
     "title": form.title.value,
     "author": form.author.value,
@@ -11,7 +11,19 @@ form.addEventListener('submit', async (e) => {
   console.log(data)
 
   await createData(data);
-  window.location.replace("http://127.0.0.1:5500/pages/page.html");
+}
+else{
+  const data = {
+    "title": form.title.value,
+    "author": form.author.value,
+    "date":form.date.value
+  };
+  console.log(data)
+
+  await updatePost(form.dataid.value);
+}
+
+  window.location.replace("http://127.0.0.1:5501/Pages/page.html");
 });
 
 const createData = async (data) => {
@@ -35,7 +47,7 @@ const lists=async()=>{
         <div>
         <h1>${post.title}</h1>
         <p>${post.author}</p>
-        <a href="/update.html?id=${post.id}">Edit</a>
+        <button onClick="getPost(${post.id})">Edit</button>
         <button onClick="deletepost(${post.id})">Delete</button>
         <div>
         `;
@@ -51,6 +63,40 @@ const deletepost=async(id)=>{
         method:'DELETE'
     })
 }
+
+const updatePost = async (id) => {
+  const data = {
+    "title": form.title.value,
+    "author": form.author.value,
+    "date":form.date.value
+  };
+  return fetch(`http://localhost:3000/blog/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+};
+
+const getPost = async (id) => {
+  await fetch(`http://localhost:3000/blog/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json;',
+    },
+  }).then(response=>response.json())
+  .then(data=>{
+    console.log(data)
+    document.getElementById('title').value=data.title;
+    document.getElementById('author').value=data.author;
+    document.getElementById('date').value=data.date;
+    document.getElementById('dataid').value=data.id;
+  })
+  .catch(error=>console.log(error));
+};
+
+
 
 window.addEventListener('DOMContentLoaded',()=>{
     return lists();

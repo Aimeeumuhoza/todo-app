@@ -10,18 +10,15 @@ if(form.action.value =="register"){
     "date":form.date.value
   };
   await createData(data);
-}else if(form.action.value =="dataid"){
+}
+ if(form.action.value ==""){
   console.log("hey");
-  const id = {
-    "dataid": form.dataid.value,
-  };
-  console.log("id",id)
-  await updatePost(id);
+  const id =  form.dataid.value
+  return updatePost(id);
 }
 // else{
 //   resetForm()
 // }
-
   window.location.replace("http://127.0.0.1:5501/Pages/page.html");
 });
 
@@ -76,11 +73,13 @@ const updatePost = async (id) => {
   };
   console.log("update")
   return fetch(`http://localhost:3000/blog/${id}`, {
-    method: 'PUT',
+    method: 'PATCH',
     body: JSON.stringify(data),
     headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+      'Content-type': 'application/json',
     },
+  }).catch((error)=>{
+    console.log(error);
   })
 };
 
@@ -97,7 +96,7 @@ const getPost = async (id) => {
     document.getElementById('author').value=data.author;
     document.getElementById('date').value=data.date;
     document.getElementById('dataid').value=data.id;
-    // document.getElementById('action').value="";
+    document.getElementById('action').value="";
   })
   .catch(error=>console.log(error));
 };

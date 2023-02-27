@@ -2,16 +2,27 @@ const form = document.querySelector('.add');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-
+  
+if(form.action.value =="register"){
   const data = {
     "title": form.title.value,
     "author": form.author.value,
     "date":form.date.value
   };
-  console.log(data)
-
   await createData(data);
-  window.location.replace("http://127.0.0.1:5500/pages/page.html");
+}else if(form.action.value =="dataid"){
+  console.log("hey");
+  const id = {
+    "dataid": form.dataid.value,
+  };
+  console.log("id",id)
+  await updatePost(id);
+}
+// else{
+//   resetForm()
+// }
+
+  window.location.replace("http://127.0.0.1:5501/Pages/page.html");
 });
 
 const createData = async (data) => {
@@ -28,15 +39,20 @@ const lists=async()=>{
     const res=await fetch(url);
     const result=await res.json();
 
-    console.log(result);
+    // console.log(result);
     let content=``;
-    result.forEach((post)=>{
+    result.map((post)=>{
         content += `
-        <div>
-        <h1>${post.title}</h1>
-        <p>${post.author}</p>
-        <a href="/update.html?id=${post.id}">Edit</a>
-        <button onClick="deletepost(${post.id})">Delete</button>
+        <div class="container">
+          <div class="data">
+              <h1>${post.title}</h1>
+            <p>${post.author}</p>
+            <span>${post.date}</span>
+            <div class="btn1">
+              <button class="post" onClick="getPost(${post.id})">Edit</button>
+              <button class="post" onClick="deletepost(${post.id})">Delete</button>
+            </div>
+          </div>
         <div>
         `;
        
@@ -51,6 +67,48 @@ const deletepost=async(id)=>{
         method:'DELETE'
     })
 }
+
+const updatePost = async (id) => {
+  const data = {
+    "title": form.title.value,
+    "author": form.author.value,
+    "date":form.date.value
+  };
+  console.log("update")
+  return fetch(`http://localhost:3000/blog/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+};
+
+const getPost = async (id) => {
+  await fetch(`http://localhost:3000/blog/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json;',
+    },
+  }).then(response=>response.json())
+  .then(data=>{
+    console.log("sd",data.id)
+    document.getElementById('title').value=data.title;
+    document.getElementById('author').value=data.author;
+    document.getElementById('date').value=data.date;
+    document.getElementById('dataid').value=data.id;
+    // document.getElementById('action').value="";
+  })
+  .catch(error=>console.log(error));
+};
+
+// function resetForm() {
+//   document.getElementById('title').value="";
+//   document.getElementById('author').value="";
+//   document.getElementById('date').value="";
+ 
+  
+// }
 
 window.addEventListener('DOMContentLoaded',()=>{
     return lists();

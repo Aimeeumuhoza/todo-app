@@ -47,7 +47,10 @@
     cursor: pointer;
     border-radius: 4px;
   }
-
+.data p, span{
+  font-size: large;
+  font-weight: 600;
+}
   /* body{
     
     

@@ -12,13 +12,11 @@ if(form.action.value =="register"){
   await createData(data);
 }
  if(form.action.value ==""){
-  console.log("hey");
+  // console.log("hey");
   const id =  form.dataid.value
   return updatePost(id);
 }
-// else{
-//   resetForm()
-// }
+
   window.location.replace("http://127.0.0.1:5501/Pages/page.html");
 });
 
@@ -42,9 +40,9 @@ const lists=async()=>{
         content += `
         <div class="container">
           <div class="data">
-              <h1>${post.title}</h1>
-            <p>${post.author}</p>
-            <span>${post.date}</span>
+            <h2>Title: ${post.title}</h2>
+            <p class="para">Author: ${post.author}</p>
+            <span>Date: ${post.date}</span>
             <div class="btn1">
               <button class="post" onClick="getPost(${post.id})">Edit</button>
               <button class="post" onClick="deletepost(${post.id})">Delete</button>
@@ -101,13 +99,6 @@ const getPost = async (id) => {
   .catch(error=>console.log(error));
 };
 
-// function resetForm() {
-//   document.getElementById('title').value="";
-//   document.getElementById('author').value="";
-//   document.getElementById('date').value="";
- 
-  
-// }
 
 window.addEventListener('DOMContentLoaded',()=>{
     return lists();

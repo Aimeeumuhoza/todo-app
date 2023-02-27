@@ -2,14 +2,19 @@ const form = document.querySelector('.add');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+<<<<<<< HEAD
   
 if(form.action.value =="register"){
+=======
+if(form.action.value=="register"){
+>>>>>>> 126a95f4f2a7373c263875efc522da3c2c7610cc
   const data = {
     "title": form.title.value,
     "author": form.author.value,
     "date":form.date.value
   };
   await createData(data);
+<<<<<<< HEAD
 }else if(form.action.value =="dataid"){
   console.log("hey");
   const id = {
@@ -21,6 +26,19 @@ if(form.action.value =="register"){
 // else{
 //   resetForm()
 // }
+=======
+}
+else{
+  const data = {
+    "title": form.title.value,
+    "author": form.author.value,
+    "date":form.date.value
+  };
+  console.log(data)
+
+  await updatePost(form.dataid.value);
+}
+>>>>>>> 126a95f4f2a7373c263875efc522da3c2c7610cc
 
   window.location.replace("http://127.0.0.1:5501/Pages/page.html");
 });
@@ -74,7 +92,10 @@ const updatePost = async (id) => {
     "author": form.author.value,
     "date":form.date.value
   };
+<<<<<<< HEAD
   console.log("update")
+=======
+>>>>>>> 126a95f4f2a7373c263875efc522da3c2c7610cc
   return fetch(`http://localhost:3000/blog/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
@@ -92,16 +113,24 @@ const getPost = async (id) => {
     },
   }).then(response=>response.json())
   .then(data=>{
+<<<<<<< HEAD
     console.log("sd",data.id)
+=======
+    console.log(data)
+>>>>>>> 126a95f4f2a7373c263875efc522da3c2c7610cc
     document.getElementById('title').value=data.title;
     document.getElementById('author').value=data.author;
     document.getElementById('date').value=data.date;
     document.getElementById('dataid').value=data.id;
+<<<<<<< HEAD
     // document.getElementById('action').value="";
+=======
+>>>>>>> 126a95f4f2a7373c263875efc522da3c2c7610cc
   })
   .catch(error=>console.log(error));
 };
 
+<<<<<<< HEAD
 // function resetForm() {
 //   document.getElementById('title').value="";
 //   document.getElementById('author').value="";
@@ -109,6 +138,9 @@ const getPost = async (id) => {
  
   
 // }
+=======
+
+>>>>>>> 126a95f4f2a7373c263875efc522da3c2c7610cc
 
 window.addEventListener('DOMContentLoaded',()=>{
     return lists();
@@ -194,7 +226,6 @@ window.addEventListener('DOMContentLoaded',()=>{
 // };
 
 // populateForm();
-
 
 
 
